@@ -2,3 +2,5 @@ Debug/
 *.user
 *.clsh
 *.suo
+*.aps
+*.ncb
