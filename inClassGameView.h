@@ -51,7 +51,10 @@ public:
         CGame *GameObj;
         CAnimation *Animation;
 
-        bool clickFlag;
+        bool isFirst;
+
+       // bool clickFlag; // determine whether it is the first point
+        // true for first, false for second
 
         void DrawBackground();
 

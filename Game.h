@@ -16,7 +16,7 @@ public:
     bool isStarted;
     bool isPaused;
 
-    bool isFirst;
+
     bool lineTest;
 
     CPoint m_curPosS, m_curPosE;
@@ -26,19 +26,21 @@ public:
     int m_width, m_height;
     int m_data[MAX_COL][MAX_ROW];
 
-    int x, y;
-
 public:
     void InitData();
     void DrawAllBmp();
-    void Gameprocedure();
+    //void Gameprocedure();
     bool Match();
-    bool VerticalTest();
-    bool HorizontalTest();
+    bool VerticalTest(int, int, int);
+    bool HorizontalTest(int, int, int);
     void DrawBmp(int, int, CDC*);
-    void Disorganize();
-    bool pickUp(CPoint);
+    void drawBmp(CPoint);
+    void drawBack(int, int, CDC*);
+    void disorganize();
+    bool pickUp(CPoint, bool);
     void eraseAni();
     bool isEmpty(CPoint);
     bool isEqual();
+    void swap(int*, int*);
+    void drawFrame(CPoint);
 };

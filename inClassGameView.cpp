@@ -42,7 +42,7 @@ END_MESSAGE_MAP()
 CinClassGameView::CinClassGameView()
 {
 	// TODO: add construction code here
-
+        isFirst = true;
 }
 
 CinClassGameView::~CinClassGameView()
@@ -229,19 +229,54 @@ void CinClassGameView::OnGameNewgame()
 void CinClassGameView::OnLButtonDown(UINT nFlags, CPoint point)
 {
     // TODO: Add your message handler code here and/or call default
-    clickFlag = false;
-    if (!clickFlag)
+ 
+/*
+    if (GameObj->isStarted)
     {
-        GameObj->m_curPosE = point;
-        clickFlag = !clickFlag;
+        if (!GameObj->isEmpty(point))
+        {
+            if (GameObj->isFirst)
+            {
+                GameObj->m_curPosS = point;
+                GameObj->isFirst = !(GameObj->isFirst);
+            }
+            else
+            {
+                GameObj->m_curPosE = point;
+                GameObj->isFirst = !(GameObj->isFirst);
+            }
+        }
+
+        //if (GameObj->Match())
+        //    GameObj->eraseAni();
+        if (GameObj->m_curPosE == GameObj->m_curPosS)
+            GameObj->eraseAni();
     }
-    else
+    */
+
+    if (GameObj->pickUp(point, isFirst))
     {
-        GameObj->m_curPosS = point;
-        clickFlag = !clickFlag;
-        GameObj->eraseAni();
+        if (isFirst)
+        {
+            GameObj->drawFrame(point);
+            isFirst = false;
+        }
+        else
+        {
+            GameObj->drawBmp(GameObj->m_curPosS);
+            if (GameObj->Match())
+            {
+                GameObj->eraseAni();
+                isFirst = true;
+            }
+            else
+            {
+                GameObj->m_curPosS = GameObj->m_curPosE;
+                GameObj->drawFrame(GameObj->m_curPosS);
+                isFirst = false;
+            }
+        }
     }
-        //GameObj->eraseAni();
 
     CView::OnLButtonDown(nFlags, point);
 }
